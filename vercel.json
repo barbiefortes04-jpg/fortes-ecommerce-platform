@@ -1,14 +1,15 @@
 {
   "version": 2,
-  "functions": {
-    "api/*.php": {
-      "runtime": "@vercel/php"
+  "builds": [
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.php"
+      "dest": "/api.js"
     },
     {
       "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg|ttf|woff|woff2)$)",
@@ -25,13 +26,5 @@
       "src": "/(.*)",
       "dest": "/public/$1"
     }
-  ],
-  "env": {
-    "PHP_VERSION": "8.2"
-  },
-  "build": {
-    "env": {
-      "PHP_VERSION": "8.2"
-    }
-  }
+  ]
 }
