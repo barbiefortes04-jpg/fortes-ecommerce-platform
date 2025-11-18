@@ -10,9 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// Database configuration
+// Database configuration - Connect to your existing MySQL database
 $host = 'localhost';
-$dbname = 'ecommerce_simple';
+$dbname = 'fortes_ecommerce'; // Your actual database name from phpMyAdmin
 $username = 'root';
 $password = '';
 
@@ -24,8 +24,7 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    // In production, log this error and show generic error to user
-    die('Database connection failed: ' . $e->getMessage());
+    die('Database connection failed: ' . $e->getMessage() . '<br>Make sure XAMPP MySQL is running and database "fortes_ecommerce" exists.');
 }
 
 // Simple routing based on request URI
@@ -34,7 +33,7 @@ $request_method = $_SERVER['REQUEST_METHOD'];
 
 // Route to API if requested
 if (strpos($request_uri, '/api/') !== false) {
-    require_once 'public/api.php';
+    require_once 'public/api_mysql.php';
     exit;
 }
 
