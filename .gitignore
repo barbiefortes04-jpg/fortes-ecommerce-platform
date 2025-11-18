@@ -1,0 +1,48 @@
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+/logs/
+
+# Cache
+.cache/
+/tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PHP specific
+/composer.phar
+composer.lock
+
+# Database
+*.sqlite
+*.db
+
+# Uploads (keep the example images)
+# /public/images/uploads/
+
+# Vercel
+.vercel
+
+# Build output
+/build/
+/dist/
+
+#Ignore insiders AI rules
+.github\instructions\codacy.instructions.md

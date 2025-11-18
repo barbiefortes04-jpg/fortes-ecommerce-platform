@@ -1,0 +1,34 @@
+{
+  "functions": {
+    "public/api_mysql.php": {
+      "runtime": "vercel-php@0.6.0"
+    },
+    "public/api.php": {
+      "runtime": "vercel-php@0.6.0"
+    },
+    "test_db.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/public/api_mysql.php"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|ico|svg)$)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/test",
+      "dest": "/test_db.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.php"
+    }
+  ],
+  "env": {
+    "PHP_VERSION": "8.0"
+  }
+}

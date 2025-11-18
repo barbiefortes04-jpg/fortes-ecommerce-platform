@@ -1,0 +1,24 @@
+{
+  "name": "fortes-ecommerce",
+  "version": "1.0.0",
+  "description": "E-commerce platform with RESTful API and MySQL integration",
+  "main": "public/index.php",
+  "scripts": {
+    "dev": "php -S localhost:8000 -t public",
+    "start": "php -S localhost:8000 -t public",
+    "serve": "php -S localhost:8000 -t public"
+  },
+  "keywords": [
+    "ecommerce",
+    "php",
+    "restful-api",
+    "mysql",
+    "shopping-cart",
+    "orders"
+  ],
+  "author": "Jherilyn Fortes",
+  "license": "MIT",
+  "engines": {
+    "php": ">=8.0"
+  }
+}
