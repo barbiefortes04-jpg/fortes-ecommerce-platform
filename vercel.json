@@ -1,19 +1,7 @@
 {
   "version": 2,
   "functions": {
-    "api/index.php": {
-      "runtime": "vercel-php@0.6.0"
-    },
-    "public/api_mysql.php": {
-      "runtime": "vercel-php@0.6.0"
-    },
-    "public/api.php": {
-      "runtime": "vercel-php@0.6.0"
-    },
-    "test_db.php": {
-      "runtime": "vercel-php@0.6.0"
-    },
-    "index.php": {
+    "api/*.php": {
       "runtime": "vercel-php@0.6.0"
     }
   },
@@ -30,12 +18,8 @@
       "dest": "/public/$1"
     },
     {
-      "src": "/test",
-      "dest": "/test_db.php"
-    },
-    {
       "src": "/",
-      "dest": "/index.php"
+      "dest": "/public/index.html"
     },
     {
       "src": "/(.*)",

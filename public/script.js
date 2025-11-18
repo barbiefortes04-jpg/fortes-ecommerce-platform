@@ -2,7 +2,7 @@
 
 class ECommerceApp {
     constructor() {
-        this.apiBase = '/api_mysql.php';
+        this.apiBase = '/api';
         this.currentPage = 'home';
         this.cart = [];
         this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
