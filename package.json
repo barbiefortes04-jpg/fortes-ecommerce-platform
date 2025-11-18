@@ -20,5 +20,8 @@
   "license": "MIT",
   "engines": {
     "php": ">=8.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }

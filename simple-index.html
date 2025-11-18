@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛍️ Fortes E-commerce Store</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.5s ease;
+        }
+
+        .splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .splash-content {
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .loading-progress {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border-radius: 2px;
+            animation: loading 3s ease-in-out;
+        }
+
+        @keyframes loading {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        /* Main Content */
+        .main-content {
+            display: none;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .main-content.active {
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .product-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #6366f1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #6366f1;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .product-category {
+            background: #333;
+            color: #ccc;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .status-message {
+            text-align: center;
+            padding: 20px;
+            background: #4CAF50;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <div class="logo">FORTES</div>
+            <div class="tagline">Premium Shopping Experience</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <h1>🛍️ Fortes E-commerce</h1>
+            <p>Your Premium Shopping Experience - Now Live!</p>
+        </div>
+
+        <div class="status-message" id="statusMessage">
+            ✅ E-commerce platform successfully loaded! Showing your products...
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be loaded here -->
+        </div>
+    </div>
+
+    <script>
+        // Products data matching your images
+        const products = [
+            { id: 1, name: 'Apple MacBook Pro', price: 2499.99, image: 'Apple_Laptop.jpg', category: 'Electronics' },
+            { id: 2, name: 'Digital Camera Pro', price: 899.99, image: 'digi_cam.jpg', category: 'Electronics' },
+            { id: 3, name: 'Premium AirPods Case', price: 49.99, image: 'Earpods_case.jpg', category: 'Electronics' },
+            { id: 4, name: 'Designer Body Suit', price: 89.99, image: 'body_suit.jpg', category: 'Fashion' },
+            { id: 5, name: 'Golden Wedding Rings', price: 1299.99, image: 'rings.jpg', category: 'Jewelry' },
+            { id: 6, name: 'Custom Coffee Mugs', price: 24.99, image: 'Mugs.jpg', category: 'Home & Kitchen' },
+            { id: 7, name: 'Cute Plushie Collection', price: 19.99, image: 'Plushie.jpg', category: 'Toys & Games' }
+        ];
+
+        // Splash screen timing
+        setTimeout(() => {
+            document.getElementById('splashScreen').classList.add('hidden');
+            document.getElementById('mainContent').classList.add('active');
+            loadProducts();
+        }, 3000);
+
+        function loadProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            
+            productsGrid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <img src="/photo_ecommerce/${product.image}" alt="${product.name}" class="product-image" 
+                         onerror="this.src='https://via.placeholder.com/300x200/6366f1/ffffff?text=${encodeURIComponent(product.name)}'">
+                    <div class="product-category">${product.category}</div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">$${product.price.toFixed(2)}</div>
+                    <button class="add-to-cart-btn" onclick="addToCart(${product.id}, '${product.name}')">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(productId, productName) {
+            alert(`🎉 "${productName}" added to your cart!\n\n✅ Product ID: ${productId}\n🛍️ Ready for checkout\n💳 Continue shopping or proceed to payment`);
+        }
+
+        console.log('✅ Fortes E-commerce loaded successfully!');
+    </script>
+</body>
+</html>
